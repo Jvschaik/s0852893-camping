@@ -14,6 +14,11 @@
         <div class="col-md-4">
             <div class="well">
                 <dl class="dl-horizontal">
+                    <dt>Url:</dt>
+                    <dd><a href="{{ route('blog.single', $post->slug) }}">{{ route('blog.single', $post->slug) }} </a></dd>
+                </dl>
+
+                <dl class="dl-horizontal">
                     <dt>Created At:</dt>
                     <dd>{{ date('j M, Y H:i', strtotime($post->created_at)) }}</dd>
                 </dl>
@@ -25,7 +30,7 @@
 
                 <div class="row">
                     <div class="col-md-6">
-                        {!! Html::linkRoute('posts.edit', 'Edit', array($post->id), array('class' => 'btn btn-primary btn-block')) !!}
+                        {{ Html::linkRoute('posts.edit', 'Edit', array($post->id), array('class' => 'btn btn-primary btn-block')) }}
                     </div>
                     <div class="col-md-6">
                         {{ Form::open(['route' => ['posts.destroy', $post->id], 'method' => 'DELETE']) }}
@@ -41,6 +46,7 @@
 
             </div>
         </div>
+    </div>
     </div>
 
 @endsection

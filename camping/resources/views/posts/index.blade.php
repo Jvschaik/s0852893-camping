@@ -41,13 +41,6 @@
                             <td>{{ $post->title }}</td>
                             <td>{{ substr($post->body, 0, 50) }} {{ strlen($post->body) > 50 ? "..." : "" }}</td>
                             <td>{{ date('j M, Y',strtotime( $post->created_at)) }}</td>
-                            {{--<td><a style="color: black" href="{{route('post.toggleActivePost', ['id' => $post->id])}}">--}}
-                                    {{--@if($post->active)--}}
-                                        {{--Disable--}}
-                                    {{--@else()--}}
-                                        {{--Enable--}}
-                                    {{--@endif--}}
-                                {{--</a></td>--}}
 
                             <td><a href="{{ route('posts.show', $post->id) }}" class="btn btn-outline-secondary btn-sm">View</a>
                                 <a href="{{ route('posts.edit', $post->id) }}" class="btn btn-outline-secondary btn-sm">Edit</a>

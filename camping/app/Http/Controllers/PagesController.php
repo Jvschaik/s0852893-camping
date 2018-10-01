@@ -15,9 +15,13 @@ class PagesController extends Controller
     public function index()
     {
         $posts = Post::orderBy('created_at', 'desc')->limit(4)->get();
-        return view('pages.welcome')->withPosts($posts);
+        return view('pages.welcome')->with('posts', $posts);
     }
 
+    public function getContact()
+    {
+        return view('pages.contact');
+    }
     /**
      * Show the form for creating a new resource.
      *

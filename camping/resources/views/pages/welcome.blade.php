@@ -9,7 +9,7 @@
         <div class="jumbotron jumbotron-billboard">
             <div class="img"></div>
             <div class="container container-header">
-                <img class="logo" src="img/better_cheaper_longer.png" alt="">
+                {{--<img class="logo" src="img/camping.jpg" alt="">--}}
             </div>
         </div>
     </div>
