@@ -28,9 +28,16 @@
                         {!! Html::linkRoute('posts.edit', 'Edit', array($post->id), array('class' => 'btn btn-primary btn-block')) !!}
                     </div>
                     <div class="col-md-6">
-                        {!! Html::linkRoute('posts.destroy', 'Delete', array($post->id), array('class' => 'btn btn-danger btn-block')) !!}
+                        {{ Form::open(['route' => ['posts.destroy', $post->id], 'method' => 'DELETE']) }}
+
+                        {{ Form::submit('Delete', ['class' => 'btn btn-danger btn-block']) }}
+
+                        {{ Form::close() }}
                     </div>
-                </div>
+
+                    <div class="col-md-12 see_posts">
+                        {{ Html::linkRoute('posts.index', '<< See All Posts', array(), array('class' => 'btn btn-default btn-block btn btn-outline-secondary ')) }}
+                    </div>
 
             </div>
         </div>
