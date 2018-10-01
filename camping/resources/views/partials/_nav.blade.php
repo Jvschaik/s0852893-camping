@@ -22,15 +22,22 @@
         </ul>
 
         <ul class="nav navbar-nav navbar-right">
-            <div class="dropdown">
-                <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    My account
-                </a>
-                <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                    <a class="dropdown-item" href="{{ route('posts.index') }}">Posts</a>
-                    <a class="dropdown-item" href="#">Log-out</a>
-                </div>
-            </div>
+            @if (Auth::check())
+
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="http://example.com" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Hi {{ Auth::user()->name }}
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                        <a class="dropdown-item" href="{{ route('posts.index') }}">Posts</a>
+                        <a class="dropdown-item" href="{{ route('logout') }}">Log-out</a>
+                    </div>
+                </li>
+            @else
+                <a href="{{ route('register') }}" class="btn btn-warning " style="margin-right: 10px" >Register</a>
+                <a href="{{ route('login') }}" class="btn btn-primary">Login</a>
+
+            @endif
         </ul>
 
     </div>

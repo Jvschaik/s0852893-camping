@@ -60,20 +60,7 @@ a:hover {
     color: black;
 }
 
-.btn-outline-primary {
-    border-color: #F1B661;
-    color: #F1B661;
-}
 
-.btn-outline-primary:hover, .btn-primary:hover {
-    background-color: #F1B661;
-    border-color: #F1B661;
-}
-
-.btn-primary {
-    border-color: #F1B661;
-    background-color: #F1B661;
-}
 
 .author-image {
     width: 50px;

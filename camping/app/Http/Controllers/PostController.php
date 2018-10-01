@@ -8,6 +8,12 @@ use Session;
 
 class PostController extends Controller
 {
+
+    public function __construct() {
+
+        //login to get to posts
+        $this->middleware('auth');
+    }
     /**
      * Display a listing of the resource.
      *
