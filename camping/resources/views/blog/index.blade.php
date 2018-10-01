@@ -4,11 +4,11 @@
 
 @section('content')
 
-    <div class="row">
-        <div class="col-md-8 col-md-offset-2 ">
-            <h1>Blog</h1>
-        </div>
-    </div>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-8 col-md-offset-2 ">
+                <h1>Campings</h1>
+            </div>
 
     @foreach($posts as $post)
         <div class="row">
