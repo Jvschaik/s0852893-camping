@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Post;
 use Session;
 use App\Category;
+use App\Tag;
 
 class PostController extends Controller
 {
@@ -34,7 +35,8 @@ class PostController extends Controller
     public function create()
     {
         $categories = Category::pluck('name','id');
-        return view('posts.create')->with('categories' , $categories);
+        $tags = Tag::pluck('name', 'id')->toArray();
+        return view('posts.create')->with('categories' , $categories)->with('tags', $tags);
     }
 
     /**
@@ -63,6 +65,8 @@ class PostController extends Controller
 
         $post->save();
 
+        $post->tags()->sync($request->tags, false);
+
         $request->session()->flash('success', 'The blog post was successfully saved!');
 
         return redirect()->route('posts.show', $post->id);
@@ -81,7 +85,8 @@ class PostController extends Controller
     {
         $post = Post::find($id);
         $categories = Category::pluck('name','id');
-        return view('posts.show')->with('post', $post)->with('categories', $categories);
+        $tags = Tag::pluck('name', 'id')->toArray();
+        return view('posts.show')->with('post', $post)->with('categories', $categories)->with('tags', $tags);
     }
 
     /**
@@ -136,6 +141,11 @@ class PostController extends Controller
 
         $post->save();
 
+        if (isset($request->tags)) {
+            $post->tags()->sync($request->tags);
+        } else {
+            $post->tags()->sync(array());
+        }
         // Set flash data with success message
         $request->session()->flash('success', 'This post was successfully saved.');
 
@@ -152,6 +162,7 @@ class PostController extends Controller
     public function destroy(Request $request, $id)
     {
         $post = Post::find($id);
+        $post ->tags()->detach();
         $post->delete();
 
         //Set flash data with success message

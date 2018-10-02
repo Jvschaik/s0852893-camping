@@ -9,6 +9,14 @@
                 <h2>{{ $post->title }}</h2>
 
                 <p class="lead">{{ $post->body }}</p>
+
+                <hr>
+
+                <div class="tags">
+                    @foreach($post->tags as $tag)
+                        <span class="btn btn-default btn-secondary">{{ $tag->name }}</span>
+                    @endforeach
+                </div>
             </div>
 
             <div class="col-md-4">

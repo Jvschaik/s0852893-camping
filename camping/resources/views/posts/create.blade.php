@@ -18,6 +18,9 @@
                 {{ Form::label('category', 'Category:') }}
                 {{ Form::select('category_id', $categories, null, ['class' => 'form-control']) }}﻿
 
+                {{ Form::label('tags', 'Tags:') }}
+                {{ Form::select('tag_id', $tags, null, ['class' => 'form-control select2-multi', 'multiple' => "multiple", 'name' => 'tags[]']) }}﻿
+
                 {{ Form::label('body', "Post Body:") }}
                 {{ Form::textarea('body', null, array('class' => 'form-control', 'required' => '')) }}
 
@@ -26,4 +29,12 @@
             </div>
         </div>
     </div>
+@endsection
+@section('scripts')
+
+    <script type="text/javascript">
+
+        $('.select2-multi').select2();
+
+    </script>
 @endsection
