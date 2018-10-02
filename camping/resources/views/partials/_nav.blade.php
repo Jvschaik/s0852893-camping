@@ -32,6 +32,7 @@
                     </a>
                     <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
                         <a class="dropdown-item" href="{{ route('posts.index') }}">Posts</a>
+                        <a class="dropdown-item" href="{{ route('categories.index') }}">Categories</a>
                         <a class="dropdown-item" href="{{ route('logout') }}">Log-out</a>
                     </div>
                 </li>
