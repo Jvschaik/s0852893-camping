@@ -7,6 +7,7 @@ Route::get('post/{slug}', ['as' => 'blog.single', 'uses' => 'BlogController@getS
 Route::get('post',['uses'=> 'BlogController@getIndex', 'as' => 'blog.index']);
 
 Route::get('contact', 'PagesController@getContact'); //go to PagesController and do what's inside getContact()
+Route::post('contact', 'PagesController@postContact');
 
 Auth::routes();
 
