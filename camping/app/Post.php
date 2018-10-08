@@ -13,4 +13,8 @@ class Post extends Model
     public function tags() {
         return $this->belongsToMany('App\Tag'); //post belongs to many tags
     }
+
+    public function user() {
+        return $this->belongsTo('App\User'); //post belongs to a User
+    }
 }

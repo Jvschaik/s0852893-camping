@@ -18,7 +18,7 @@ class CategoryController extends Controller
     {
         //display a view of all of the categories and form to create a new category
         $categories = Category::all();
-        return view('categories.index')->withCategories($categories);
+        return view('categories.index')->with('categories',$categories);
     }
 
 

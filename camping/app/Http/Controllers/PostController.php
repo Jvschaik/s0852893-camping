@@ -4,9 +4,11 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Post;
+use Illuminate\Support\Facades\Auth;
 use Session;
 use App\Category;
 use App\Tag;
+use App\User;
 
 class PostController extends Controller
 {
@@ -23,9 +25,12 @@ class PostController extends Controller
      */
     public function index()
     {
-        $posts = Post::orderBy('id', 'desc')->paginate(5);
+        $user_id = Auth::user()->id;
+        $posts = Post::where('user_id', $user_id)->orderBy('id', 'desc')->paginate(5);
         return view('posts.index')->with('posts', $posts);
     }
+
+
 
     /**
      * Show the form for creating a new resource.
@@ -59,9 +64,11 @@ class PostController extends Controller
         $post = new Post;
 
         $post->title = $request->title;
+        $post->user_id = Auth::user()->id;
         $post->slug = $request->slug;
         $post->category_id = $request->category_id;
         $post->body = $request->body;
+
 
         $post->save();
 
@@ -98,10 +105,12 @@ class PostController extends Controller
     public function edit($id)
     {
         //find the post in the database and save as a var
-        $post = Post::find($id);
+        $user_id = Auth::user()->id;
+        $post = Post::where('user_id', $user_id)->find($id);
         $categories = Category::pluck('name','id');
+        $tags = Tag::pluck('name', 'id')->toArray();
         //return the view and pass in the var we previously created
-        return view('posts.edit')->with('post', $post)->with('categories', $categories);
+        return view('posts.edit')->with('post', $post)->with('categories', $categories)->with('tags', $tags);
     }
 
     /**
@@ -135,6 +144,7 @@ class PostController extends Controller
         $post = Post::find($id);
 
         $post->title = $request->input('title');
+        $post->user_id = Auth::user()->id;
         $post->slug = $request->input('slug');
         $post->category_id = $request->input('category_id');
         $post->body = $request->input('body');

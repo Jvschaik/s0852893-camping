@@ -9,28 +9,25 @@
         <div class="jumbotron jumbotron-billboard">
             <div class="img"></div>
             <div class="container container-header">
-                {{--<img class="logo" src="img/camping.jpg" alt="">--}}
             </div>
         </div>
     </div>
 </div>
-{{--end row--}}
+
 <div class="container">
-
     <div class="row">
-        <div class="col-md-8">
-
-            @foreach($posts as $post)
-
-                <div class="post">
-                    <h3>{{ $post->title }}</h3>
-                    <p>{{ substr($post->body, 0, 300)}}{{ strlen($post->body) > 300 ? "..." : "" }}</p>
-                    <a href="{{ url('post/'.$post->slug) }}" class="btn btn-outline-primary">Read more</a>
+        @foreach($posts as $post)
+        <div class="col-lg-6">
+                <div class="card post mb-4" >
+                    {{--<img class="card-img-top" src="..." alt="Card image cap">--}}
+                    <div class="card-body">
+                        <h5 class="card-title">{{ $post->title }}</h5>
+                        <p class="card-text">{{ substr($post->body, 0, 300)}}{{ strlen($post->body) > 300 ? "..." : "" }}</p>
+                        <a href="{{ url('post/'.$post->slug) }}" class="btn btn-outline-primary">Read more</a>
+                    </div>
                 </div>
-
-                <hr>
-            @endforeach
         </div>
+        @endforeach
     </div>
 </div>
 
