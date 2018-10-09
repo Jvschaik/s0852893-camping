@@ -6,14 +6,20 @@
 
     <div class="container">
 
-
-        {{ Form::model($tag, ['route' => ['tags.update', $tag->id], 'method' => "PUT"]) }}
-
-        {{ Form::label('name', 'Name:') }}
-        {{ Form::text('name', null, ['class' => 'form-control']) }}
-        {{ Form::submit('Save Changes', ['class' => 'btn btn-success', 'style' => 'margin-top: 20px']) }}
-
-        {{ Form::close() }}
+        <form action="{{ route('tags.update', $tag->id) }}" method="post" novalidate>
+            {{ csrf_field() }}
+            {{ method_field('PUT') }}
+            <div class="form-group">
+                <label for="name">Name:</label>
+                <input type="text" class="form-control{{ $errors->has('name') ? ' is-invalid' : '' }}" id="name" name="name" value="{{ $tag->name}}">
+                @if($errors->has('name'))
+                    <div class="invalid-feedback">
+                        {{ $errors->first('name') }}
+                    </div>
+                @endif
+            </div>
+            <button type="submit" class="btn btn-success">Save Changes</button>
+        </form>
     </div>
 
 

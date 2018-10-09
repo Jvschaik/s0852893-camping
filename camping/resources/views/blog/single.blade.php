@@ -1,4 +1,4 @@
-@extends('layouts.app') <!-- extends from layouts app.blade.php -->
+@extends('layouts.app')
 
 <?php $titleTag = htmlspecialchars($post->title); ?>
 @section('title', "| $titleTag" )
@@ -8,6 +8,7 @@
         <div class="row">
             <div class="col md-8 col-md-offset-2">
                 <h3>{{ $post->title }}</h3>
+
                 <img src="{{ asset('img/'. $post->image) }}" height="200" width="300" alt="image_upload">
                 <p>{{ $post->body }}</p>
                 <hr>
@@ -16,8 +17,10 @@
                         <span class="btn btn-primary btn-sm"><a href="{{ route('tags.show', $tag->id ) }}"> {{ $tag->name }}</a></span>
                     @endforeach
                 </p>
+
             </div>
         </div>
+
         <div class="row">
             <div class="col-md-8 col-md-offset-2">
                 <h3 class="reviews-title"><i class="fa fa-fw fa-lg fa-review" aria-hidden="true"></i> {{ $post->reviews()->count() }} Reviews</h3>
@@ -30,41 +33,55 @@
                                 <p class="author-time">{{ date('n F  Y - g:iA' ,strtotime($review->created_at)) }}</p>
                             </div>
                         </div>
-
                         <div class="review-content">
                             {{ $review->review }}
                         </div>
-
                     </div>
                 @endforeach
             </div>
         </div>
-
         <div class="row">
-            <div id="review-form" class="col-md-8 col-md-offset-2" style="margin-top: 20px;">
-                {{ Form::open(['route' => ['reviews.store', $post->id], 'method' => 'POST']) }}
+            @foreach($post->reviews as $review)
+                <div id="review-form" class="col-md-8 col-md-offset-2" style=" margin-top: 20px;">
+                    <form action="{{ route('reviews.store', $post->id) }}" method="post" novalidate>
+                        {{ csrf_field() }}
+                        <div class="form-group">
+                            <label for="name">Name:</label>
+                            <input type="text" class="form-control{{ $errors->has('name') ? ' is-invalid' : '' }}" id="name" name="name" value="">
+                            @if($errors->has('name'))
+                                <div class="invalid-feedback">
+                                    {{ $errors->first('name') }}
+                                </div>
+                            @endif
+                        </div>
+                        <div class="form-group">
+                            <label for="email">Email:</label>
+                            <input type="text" class="form-control{{ $errors->has('email') ? ' is-invalid' : '' }}" id="email" name="email" value="">
+                            @if($errors->has('email'))
+                                <div class="invalid-feedback">
+                                    {{ $errors->first('email') }}
+                                </div>
+                            @endif
+                        </div>
 
-                <div class="row">
-                    <div class="col-md-6">
-                        {{ Form::label('name', "Name:") }}
-                        {{ Form::text('name', null, ['class' => 'form-control']) }}
-                    </div>
+                        <div class="form-group">
+                            <label for="review">review:</label>
+                            <textarea type="text" class="form-control" id="review" name="review" cols="50" rows="10" {{ old('review', $review->review) }}></textarea>
+                            @if($errors->has('review'))
+                                <div class="invalid-feedback">
+                                    {{ $errors->first('review') }}
+                                </div>
+                            @endif
+                        </div>
 
-                    <div class="col-md-6">
-                        {{ Form::label('email', 'Email:') }}
-                        {{ Form::text('email', null, ['class' => 'form-control']) }}
-                    </div>
-
-                    <div class="col-md-12">
-                        {{ Form::label('review', "review:") }}
-                        {{ Form::textarea('review', null, ['class' => 'form-control', 'rows' => '5']) }}
-
-                        {{ Form::submit('Add review', ['class' => 'btn btn-success btn-block', 'style' => 'margin-top:15px;']) }}
-                    </div>
+                        <button type="submit" class="btn btn-block btn-success">Add review</button>
+                        @endforeach
+                    </form>
                 </div>
-
-                {{ Form::close() }}
-            </div>
         </div>
+
     </div>
 @endsection
+
+
+

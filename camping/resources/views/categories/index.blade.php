@@ -1,7 +1,5 @@
 @extends('layouts.app')
-
 @section('title', '| All Categories')
-
 @section('content')
 
     <div class="container">
@@ -15,11 +13,8 @@
                         <th>Name</th>
                     </tr>
                     </thead>
-
                     <tbody>
-
                     @foreach( $categories as $category)
-
                         <tr>
                             <td>{{ $category->id }}</td>
                             <td>{{ $category->name }}</td>
@@ -31,15 +26,23 @@
 
             <div class="col-md-3 col-md-offset-2">
                 <div class="well">
-                    {{ Form::open(['route' => 'categories.store', 'method' => 'POST']) }}
                     <h2>New Category</h2>
 
-                    {{ Form::label('name', 'Name') }}
-                    {{ Form::text('name', null, ['class' => 'form-control']) }}
-                    {{ Form::submit('Create New Category', ['class' => 'btn btn-outline-primary btn-block btn-h1-spacing']) }}
-
-                    {{ Form::close() }}
+                    <form action="{{ route('categories.store') }}" method="post" novalidate>
+                        {{ csrf_field() }} {{ method_field('POST') }}
+                        <div class="form-group">
+                            <label for="name">Name:</label>
+                            <input type="text" class="form-control{{ $errors->has('name') ? ' is-invalid' : '' }}" id="name" name="name">
+                            @if($errors->has('name'))
+                                <div class="invalid-feedback">
+                                    {{ $errors->first('name') }}
+                                </div>
+                            @endif
+                        </div>
+                        <button type="submit" class="btn btn-success">Create New Category</button>
+                    </form>
                 </div>
+
             </div>
         </div>
     </div>
