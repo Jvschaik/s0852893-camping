@@ -40,8 +40,8 @@ class PostController extends Controller
      */
     public function create()
     {
-        $categories = Category::pluck('name','id');
-        $tags = Tag::pluck('name', 'id')->toArray();
+        $categories = Category::all();
+        $tags = Tag::all();
         return view('posts.create')->with('categories' , $categories)->with('tags', $tags);
     }
 
