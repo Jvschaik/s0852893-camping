@@ -8,6 +8,8 @@
             <div class="col-md-8">
                 <h2>{{ $post->title }}</h2>
 
+                <img src="{{ asset('img/'. $post->image) }}" height="200" width="300" alt="image_upload">
+
                 <p class="lead">{{ $post->body }}</p>
 
                 <hr>

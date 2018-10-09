@@ -8,6 +8,7 @@
         <div class="row">
             <div class="col md-8 col-md-offset-2">
                 <h3>{{ $post->title }}</h3>
+                <img src="{{ asset('img/'. $post->image) }}" height="200" width="300" alt="image_upload">
                 <p>{{ $post->body }}</p>
                 <hr>
                 <p>Posted In: {{ $post->category->name }}</p>

@@ -8,7 +8,8 @@ use Illuminate\Support\Facades\Auth;
 use Session;
 use App\Category;
 use App\Tag;
-use App\User;
+use Image;
+use Storage;
 
 class PostController extends Controller
 {
@@ -57,7 +58,8 @@ class PostController extends Controller
             'title' => 'required|max:255',
             'slug' => 'required|alpha_dash|min:5|max:255|unique:posts,slug',
             'category_id' => 'required|integer',
-            'body' => 'required'
+            'body' => 'required',
+            'featured_image' => 'sometimes|image'
         ));
 
         //store in the database
@@ -68,6 +70,16 @@ class PostController extends Controller
         $post->slug = $request->slug;
         $post->category_id = $request->category_id;
         $post->body = $request->body;
+
+
+        if ($request->hasFile('featured_image')) {
+            $image = $request->file('featured_image');
+            $filename = time() . '.' . $image->getClientOriginalExtension(); //get extension in the file (jpg, png etc)
+            $location = public_path('img/' . $filename); //set the location for the image (public/img)
+            Image::make($image)->resize(400, 400)->save($location); //create image object, resize the image, save it in public/img
+
+            $post->image = $filename; //set image column equal to $filename
+        }
 
 
         $post->save();
@@ -127,7 +139,8 @@ class PostController extends Controller
             $this->validate($request, array(
                 'title' => 'required|max:255',
                 'category_id' => 'required|integer',
-                'body' => 'required'
+                'body' => 'required',
+                'featured_image' => 'sometimes|image'
             ));
 
         } else {
@@ -135,7 +148,8 @@ class PostController extends Controller
                 'title' => 'required|max:255',
                 'slug' => 'required|alpha_dash|min:5|max:255|unique:posts,slug',
                 'category_id' => 'required|integer',
-                'body' => 'required'
+                'body' => 'required',
+                'featured_image' => 'sometimes|image'
             ));
 
         }
@@ -148,6 +162,22 @@ class PostController extends Controller
         $post->slug = $request->input('slug');
         $post->category_id = $request->input('category_id');
         $post->body = $request->input('body');
+
+        if ($request->hasFile('featured_image')) {
+            //add new photo
+            $image = $request->file('featured_image');
+            $filename = time() . '.' . $image->getClientOriginalExtension();
+            $location = public_path('img/' . $filename);
+            Image::make($image)->resize(400, 400)->save($location);
+            $oldFilename = $post->image;
+
+            //update the database
+            $post->image = $filename;
+
+            //delete old photo
+            Storage::delete($oldFilename);
+        }
+
 
         $post->save();
 
@@ -172,7 +202,8 @@ class PostController extends Controller
     public function destroy(Request $request, $id)
     {
         $post = Post::find($id);
-        $post ->tags()->detach();
+        $post->tags()->detach();
+        Storage::delete($post->image);
         $post->delete();
 
         //Set flash data with success message
