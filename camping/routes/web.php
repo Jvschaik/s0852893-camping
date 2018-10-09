@@ -12,14 +12,20 @@ Route::post('contact', 'PagesController@postContact');
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
-Route::get('auth/login', 'Auth\LoginController@showLoginForm');
-Route::get('auth/register', 'Auth\RegisterController@showRegistrationForm');
+
 Route::get('logout', 'Auth\LoginController@logout')->name('logout');
 
-Route::get('password/reset', 'Auth\ForgotPasswordController@showLinkRequestForm')->name('password.request');
-Route::post('password/email', 'Auth\ForgotPasswordController@sendResetLinkEmail')->name('password.email');
-Route::get('password/reset/{token}', 'Auth\ResetPasswordController@showResetForm')->name('password.reset');
-Route::post('password/reset', 'Auth\ResetPasswordController@reset');
+Route::prefix('password')->group(function() {
+    Route::get('/reset', 'Auth\ForgotPasswordController@showLinkRequestForm')->name('password.request');
+    Route::post('/email', 'Auth\ForgotPasswordController@sendResetLinkEmail')->name('password.email');
+    Route::get('/reset/{token}', 'Auth\ResetPasswordController@showResetForm')->name('password.reset');
+    Route::post('/reset', 'Auth\ResetPasswordController@reset');
+});
+
+Route::prefix('auth')->group(function() {
+    Route::get('/login', 'Auth\LoginController@showLoginForm');
+    Route::get('/register', 'Auth\RegisterController@showRegistrationForm');
+});
 
 Auth::routes();
 
@@ -34,6 +40,12 @@ Route::prefix('reviews')->group(function() {
     Route::put('/{id}', ['uses' => 'ReviewsController@update', 'as' => 'reviews.update']);
     Route::delete('/{id}', ['uses' => 'ReviewsController@destroy', 'as' => 'reviews.destroy']);
     Route::get('/{id}/delete', ['uses' => 'ReviewsController@delete', 'as' => 'reviews.delete']);
+});
+
+Route::prefix('admin')->group(function() {
+    Route::get('/login', 'Auth/AdminLoginController@showLoginForm')->name('admin.login');
+    Route::post('/login', 'Auth/AdminLoginController@login')->name('admin.login.submit');
+    Route::get('/', 'AdminController@index')->name('admin.dashboard');
 });
 
 
