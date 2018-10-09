@@ -2,9 +2,9 @@
 
 Route::get('/', 'PagesController@index');
 Route::resource('posts', 'PostController');
-Route::get('post/{slug}', ['as' => 'blog.single', 'uses' => 'BlogController@getSingle']) -> where('slug', '[\w\d\-\_]+'); // any letter\ any number\ any dash\ any underscore
+Route::get('post/{slug}', ['as' => 'blog.single', 'uses' => 'BlogController@getSingle'])->where('slug', '[\w\d\-\_]+'); // any letter\ any number\ any dash\ any underscore
 
-Route::get('post',['uses'=> 'BlogController@getIndex', 'as' => 'blog.index']);
+Route::get('post', ['uses' => 'BlogController@getIndex', 'as' => 'blog.index']);
 
 Route::get('contact', 'PagesController@getContact'); //go to PagesController and do what's inside getContact()
 Route::post('contact', 'PagesController@postContact');
@@ -27,3 +27,13 @@ Route::get('/home', 'HomeController@index')->name('home');
 
 Route::resource('categories', 'CategoryController', ['except' => ['create']]);
 Route::resource('tags', 'TagController', ['except' => ['create']]);
+
+Route::prefix('reviews')->group(function() {
+    Route::post('/{post_id}', ['uses' => 'ReviewsController@store', 'as' => 'reviews.store']);
+    Route::get('/{id}/edit', ['uses' => 'ReviewsController@edit', 'as' => 'reviews.edit']);
+    Route::put('/{id}', ['uses' => 'ReviewsController@update', 'as' => 'reviews.update']);
+    Route::delete('/{id}', ['uses' => 'ReviewsController@destroy', 'as' => 'reviews.destroy']);
+    Route::get('/{id}/delete', ['uses' => 'ReviewsController@delete', 'as' => 'reviews.delete']);
+});
+
+

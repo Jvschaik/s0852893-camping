@@ -17,4 +17,8 @@ class Post extends Model
     public function user() {
         return $this->belongsTo('App\User'); //post belongs to a User
     }
+
+    public function reviews() {
+        return $this->hasMany('App\Review'); // post has many reviews
+    }
 }

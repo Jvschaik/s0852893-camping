@@ -99,7 +99,7 @@ nav, #first-nav {
     float: left;
 }
 
-.comment {
+.review {
     margin-bottom: 45px;
 }
 
@@ -118,19 +118,19 @@ nav, #first-nav {
     color: #aaa;
 }
 
-.comment-content {
+.review-content {
     clear: both;
     margin-left: 65px;
     font-size: 16px;
     line-height: 1.3em;
 }
 
-.comments-title {
+.reviews-title {
     margin-bottom: 45px;
     margin-top: 40px;
 }
 
-.comments-title i {
+.reviews-title i {
     margin-right: 15px;
 }
 
@@ -138,11 +138,7 @@ nav, #first-nav {
     color: red !important;
 }
 
-#footer {
-    position: absolute;
-    bottom: 0;
-    width: 100%;
-}
+
 
 
 

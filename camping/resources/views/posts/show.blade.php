@@ -17,6 +17,44 @@
                         <span class="btn btn-default btn-secondary">{{ $tag->name }}</span>
                     @endforeach
                 </div>
+
+                <div id="backend-reviews" style="margin-top: 50px">
+                    <h3>Reviews
+                        <small>{{ $post->reviews()->count() }} total</small>
+                    </h3>
+
+                    <table class="table">
+                        <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Email</th>
+                            <th>review</th>
+                            <th width="100px"></th>
+                        </tr>
+                        </thead>
+                        <tbody>
+
+                        @foreach($post->reviews as $review)
+
+                            <tr>
+                                <td>{{ $review->name }}</td>
+                                <td>{{ $review->email }}</td>
+                                <td>{{ $review->review }}</td>
+                                <td width="100px">
+
+                                    <a href="{{ route('reviews.edit', $review->id) }}" class=" btn btn-sm btn-success"><i class="fa fa-pencil" aria-hidden="true"></i></a>
+                                    <a href="{{ route('reviews.delete', $review->id) }}" class="btn btn-sm btn-danger"><i class="fa fa-trash" aria-hidden="true"></i></a>
+
+                                </td>
+                            </tr>
+
+                        </tbody>
+                        @endforeach
+
+                    </table>
+
+                </div>
+                
             </div>
 
             <div class="col-md-4">
