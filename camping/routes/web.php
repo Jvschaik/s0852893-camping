@@ -2,6 +2,7 @@
 
 Route::get('/', 'PagesController@index');
 Route::resource('posts', 'PostController');
+Route::get('toggle/{id}', 'PostController@toggleActivePost')->name('post.toggleActivePost');
 Route::get('post/{slug}', ['as' => 'blog.single', 'uses' => 'BlogController@getSingle'])->where('slug', '[\w\d\-\_]+'); // any letter\ any number\ any dash\ any underscore
 
 Route::get('post', ['uses' => 'BlogController@getIndex', 'as' => 'blog.index']);

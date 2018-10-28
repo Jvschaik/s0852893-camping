@@ -94,6 +94,24 @@ class PostController extends Controller
 
     }
 
+    public function toggleActivePost($id){
+        $post = Post::find($id);
+        //dd($post);
+
+        if($post->visible) {
+            $post->visible = false;
+            $post->save();
+            return view('posts.index')->with('posts', $post);
+        }
+
+        else if(!$post->active) {
+            $post->visible = true;
+            $post->save;
+            return view('posts.index')->with('posts', $post);
+        }
+
+    }
+
     /**
      * Display the specified resource.
      *
