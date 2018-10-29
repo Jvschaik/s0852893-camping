@@ -43,9 +43,9 @@
                             <td>{{ date('j M, Y',strtotime( $post->created_at)) }}</td>
 
                             <td><a style="color: black" href="{{route('post.toggleActivePost', ['id' => $post->id])}}">
-                                    @if($post->active)
+                                    @if($post->visible)
                                         Disable
-                                    @else()
+                                    @elseif(!$post->visible)
                                         Enable
                                     @endif
                                 </a></td>

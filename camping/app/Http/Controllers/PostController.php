@@ -96,7 +96,8 @@ class PostController extends Controller
 
     public function toggleActivePost($id){
         $post = Post::find($id);
-        //dd($post);
+
+        //dd($post->visible);
 
         if($post->visible) {
             $post->visible = false;
@@ -104,11 +105,11 @@ class PostController extends Controller
             return view('posts.index')->with('posts', $post);
         }
 
-        else if(!$post->active) {
+        else {
             $post->visible = true;
-            $post->save;
-            return view('posts.index')->with('posts', $post);
+            $post->save();
         }
+            return view('posts.index')->with('posts', $post);
 
     }
 
