@@ -31,6 +31,15 @@
             @endif
         @endforeach
     </div>
+
+    <div class="row">
+        <div class="col-md-12">
+            <div class="text-center pagination">
+                {{ $posts->render("pagination::bootstrap-4") }}
+            </div>
+        </div>
+    </div>
+
 </div>
 
 @endsection

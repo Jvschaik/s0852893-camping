@@ -14,7 +14,7 @@ class PagesController extends Controller
      */
     public function index()
     {
-        $posts = Post::orderBy('created_at', 'desc')->limit(4)->get();
+        $posts = Post::orderBy('created_at', 'desc')->paginate(4);
         //$posts = Post::with('reviews')->get();
         return view('pages.welcome')->with('posts', $posts);
     }
