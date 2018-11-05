@@ -4,6 +4,7 @@
 @section('title', "| $titleTag" )
 
 @section('content')
+    @if($post->visible)
     <div class="container">
         <div class="row">
             <div class="col md-8 col-md-offset-2">
@@ -79,7 +80,19 @@
                     </form>
                 </div>
         </div>
+    </div>
 
+    @elseif(!$post->visible)
+        <div class="container">
+        <div class="row">
+            <div class="col-md-6">
+                <h2 style="color: red">Sorry!</h2>
+                <br>
+                <p>Selected page cannot be found</p>
+                <p>Please try another search</p>
+            </div>
+        </div>
+        @endif
     </div>
 @endsection
 

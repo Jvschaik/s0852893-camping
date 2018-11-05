@@ -44,14 +44,14 @@
 
                             <td><a style="color: black" href="{{route('post.toggleActivePost', ['id' => $post->id])}}">
                                     @if($post->visible)
-                                        Disable
+                                        <p class=" btn btn-danger btn-sm">Disable</p>
                                     @elseif(!$post->visible)
-                                        Enable
+                                        <p class="btn btn-success btn-sm">Enable </p>
                                     @endif
                                 </a></td>
 
-                            <td><a href="{{ route('posts.show', $post->id) }}" class="btn btn-outline-secondary btn-sm">View</a>
-                                <a href="{{ route('posts.edit', $post->id) }}" class="btn btn-outline-secondary btn-sm">Edit</a>
+                            <td><a href="{{ route('posts.show', $post->id) }}" class="btn btn-outline-success btn-sm">View</a>
+                                <a href="{{ route('posts.edit', $post->id) }}" class="btn btn-outline-warning btn-sm">Edit</a>
                             </td>
 
                         </tr>

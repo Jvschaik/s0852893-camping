@@ -16,6 +16,14 @@ a:hover {
     text-decoration: none;
 }
 
+.url-link {
+    color: black;
+}
+
+.url-link:hover {
+    color:cornflowerblue !important;
+    text-decoration: none;
+}
 nav, #first-nav {
     background-color: #0076D8;
     padding: 8px 0 8px 0;
