@@ -41,7 +41,7 @@
             </div>
         </div>
         <div class="row">
-            @foreach($post->reviews as $review)
+
                 <div id="review-form" class="col-md-8 col-md-offset-2" style=" margin-top: 20px;">
                     <form action="{{ route('reviews.store', $post->id) }}" method="post" novalidate>
                         {{ csrf_field() }}
@@ -66,7 +66,7 @@
 
                         <div class="form-group">
                             <label for="review">review:</label>
-                            <textarea type="text" class="form-control" id="review" name="review" cols="50" rows="10" {{ old('review', $review->review) }}></textarea>
+                            <textarea type="text" class="form-control" id="review" name="review" cols="50" rows="10" {{ old('review', $post->review) }}></textarea>
                             @if($errors->has('review'))
                                 <div class="invalid-feedback">
                                     {{ $errors->first('review') }}
@@ -75,7 +75,7 @@
                         </div>
 
                         <button type="submit" class="btn btn-block btn-success">Add review</button>
-                        @endforeach
+
                     </form>
                 </div>
         </div>
