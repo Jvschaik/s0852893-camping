@@ -44,9 +44,9 @@
 
                             <td><a style="color: black" href="{{route('post.toggleActivePost', ['id' => $post->id])}}">
                                     @if($post->visible)
-                                        <p class=" btn btn-danger btn-sm">Disable</p>
+                                        <p class=" btn btn-danger btn-sm">Hide</p>
                                     @elseif(!$post->visible)
-                                        <p class="btn btn-success btn-sm">Enable </p>
+                                        <p class="btn btn-success btn-sm">View </p>
                                     @endif
                                 </a></td>
 
