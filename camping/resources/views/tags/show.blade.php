@@ -7,10 +7,11 @@
     <div class="container">
         <div class="row">
             <div class="col-md-8">
-                <h1>{{ $tag->name }} Tag
+                <h1>{{ $tag->name }}
                     <small> {{ $tag->posts()->count() }} Posts</small>
                 </h1>
             </div>
+            @if (Auth::check())
             <div class="col-md-2">
                 <a href="{{ route('tags.edit', $tag->id) }}" class="btn btn-primary btn-block" style="float: right;">Edit</a>
             </div>
@@ -23,6 +24,8 @@
                     {{ method_field('DELETE') }}
                 </form>
             </div>
+
+                @endif
         </div>
 
         <div class="row">
@@ -46,7 +49,8 @@
                                     <span class="btn btn-primary btn-sm"> {{ $tag->name }}</span>
                                 @endforeach
                             </td>
-                            <td><a href="{{ route('posts.show', $post->id) }}" class="btn btn-outline-secondary btn-sm">View</a></td>
+                            <td> <a href="{{ url('post/'.$post->slug) }}" class="btn btn-outline-secondary btn-sm">Read more</a></td>
+
                         </tr>
                     @endforeach
                     </tbody>

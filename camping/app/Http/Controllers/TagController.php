@@ -5,13 +5,14 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Tag;
 use Session;
+use App\Post;
 
 class TagController extends Controller
 {
 
     public function __construct()
     {
-        $this->middleware('auth'); //only authenticated user are allowed to this controler
+        $this->middleware('auth', ['except' => 'show']); //only authenticated user are allowed to this controler
     }
 
     public function index()
@@ -36,8 +37,9 @@ class TagController extends Controller
 
     public function show($id)
     {
+        $post = Post::find($id);
         $tag = Tag::find($id);
-        return view('tags.show')->with('tag', $tag);
+        return view('tags.show')->with('tag', $tag, 'post', $post);
     }
 
     public function edit($id)
