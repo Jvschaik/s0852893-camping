@@ -13,6 +13,24 @@
         </div>
     </div>
 </div>
+<div class="container">
+    <div class="row">
+        <div class="col-8">
+        <h2 class="title-welcome">All Campings</h2>
+        </div>
+        <div class="col-4 search">
+            {{ Form::open(['route' => ['posts.search'], 'method' => 'GET', 'class'=>'form navbar-form navbar-right searchform']) }}
+            {{ method_field('get') }}
+            {{ Form::text('search', null,
+                                   array('required',
+                                        'class'=>'form-control')) }}
+            {{ Form::submit('Search',
+                                       array('class'=>'btn btn-primary')) }}
+            {{ Form::close() }}
+        </div>
+    </div>
+</div>
+
 
 <div class="container">
     <div class="row">

@@ -48,5 +48,4 @@ class PagesController extends Controller
 
         return redirect('/contact');
     }
-
 }

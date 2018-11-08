@@ -17,7 +17,7 @@ class PostController extends Controller
     public function __construct() {
 
         //login to get to posts
-        $this->middleware('auth');
+        $this->middleware('auth', ['except' => 'search']);
     }
     /**
      * Display a listing of the resource.
@@ -231,4 +231,17 @@ class PostController extends Controller
         //redirect with flash data to posts.index
         return redirect()->route('posts.index');
     }
+
+    public function search(Request $request)
+    {
+        // Gets the query string from our form submission
+        $query = $request->input('search');
+        // Returns an array of articles that have the query string located somewhere within
+        // our articles titles. Paginates them so we can break up lots of search results.
+        $articles = Post::where('title', 'LIKE', '%' . $query . '%')->paginate(10);
+
+        // returns a view and passes the view the list of articles and the original query.
+        return view('posts.search', compact('articles', 'query'));
+    }
+
 }
