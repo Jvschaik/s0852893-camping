@@ -15,9 +15,6 @@
             <li class="nav-item {{ Request::is('users') ? "active": ""}}">
                 <a class="nav-link" href="/users">Owners</a>
             </li>
-            <li class="nav-item {{ Request::is('posts') ? "active": ""}}">
-                <a class="nav-link" href="/posts">Campings</a>
-            </li>
             <li class="nav-item {{ Request::is('contact') ? "active": ""}}">
                 <a class="nav-link" href="/contact">Contact</a>
             </li>
