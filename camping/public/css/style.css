@@ -173,6 +173,12 @@ nav, #first-nav {
     display: flex;
 }
 
+.card-title {
+    margin-top: .75rem;
+    color: #0076D8;
+    font-weight: bold;
+}
+
 
 
 
