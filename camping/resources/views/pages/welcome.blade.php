@@ -15,9 +15,21 @@
 </div>
 <div class="container">
     <div class="row">
-        <div class="col-8">
+        <div class="col-6">
         <h2 class="title-welcome">All Campings</h2>
         </div>
+
+        <div class="dropdown col-2">
+            <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                Filter
+            </button>
+            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                @foreach ($tags as $tag)
+                <a class="dropdown-item" href="{{ route('tags.show', $tag->id ) }}"> {{ $tag->name }}</a>
+                    @endforeach
+            </div>
+        </div>
+
         <div class="col-4 search">
             {{ Form::open(['route' => ['posts.search'], 'method' => 'GET', 'class'=>'form navbar-form navbar-right searchform']) }}
             {{ method_field('get') }}

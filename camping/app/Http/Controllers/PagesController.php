@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Post;
+use App\Tag;
 
 class PagesController extends Controller
 {
@@ -15,8 +16,9 @@ class PagesController extends Controller
     public function index()
     {
         $posts = Post::orderBy('created_at', 'desc')->paginate(4);
+        $tags = Tag::all();
         //$posts = Post::with('reviews')->get();
-        return view('pages.welcome')->with('posts', $posts);
+        return view('pages.welcome')->with('posts', $posts)->with('tags', $tags);
     }
 
     public function getContact()
